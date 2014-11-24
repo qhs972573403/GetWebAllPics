@@ -104,16 +104,14 @@ namespace GetWebContent
             HtmlNodeCollection atts = m_Doc.DocumentNode.SelectNodes("//*[@src]");
             if (Equals(atts, null))
             {
-               
+                return;
             }
 
             Links = atts.
                 SelectMany(n => new[]
 					{
 						ParseLink(n, "src"),
-                      
-                        
-				
+
 					}).
                 Distinct().
                 ToArray();
