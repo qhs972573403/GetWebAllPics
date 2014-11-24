@@ -104,20 +104,14 @@ namespace GetWebContent
             HtmlNodeCollection atts = m_Doc.DocumentNode.SelectNodes("//*[@src]");
             if (Equals(atts, null))
             {
-                atts = m_Doc.DocumentNode.SelectNodes("//*[@data-src]");
-                if (Equals(atts, null))
-                {
-                    Links = new string[0];
-                    return;
-                }
+               
             }
 
             Links = atts.
                 SelectMany(n => new[]
 					{
 						ParseLink(n, "src"),
-                        ParseLink(n, "orgSrc"),
-                        ParseLink(n, "data-src"),
+                      
                         
 				
 					}).

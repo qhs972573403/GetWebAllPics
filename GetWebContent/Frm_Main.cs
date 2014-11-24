@@ -92,8 +92,8 @@ namespace GetWebContent
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            this.textBoxUrl.Text = "http://blog.csdn.net/lmj623565791/article/details/41087219";
-            this.textBoxCssPath.Text = "div#article_content.article_content";
+            this.textBoxUrl.Text = "http://www.cnblogs.com/ice-river/p/4112323.html";
+            this.textBoxCssPath.Text = "div#cnblogs_post_body";
             deles = new TaskDelegate(new ccTaskDelegate(RefreshTask));
         }
 
