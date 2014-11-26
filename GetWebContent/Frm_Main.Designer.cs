@@ -207,7 +207,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Frm_Main";
-            this.Text = "抓取博客正文Demo";
+            this.Text = "抓取博客正文工具";
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

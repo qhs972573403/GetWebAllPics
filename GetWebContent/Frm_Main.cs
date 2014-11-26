@@ -20,6 +20,7 @@ namespace GetWebContent
         private WebDownloader m_wd = new WebDownloader();
         private TaskDelegate deles;
         private BloomFilter m_bf = new BloomFilter(10485760);
+
         public Frm_Main()
         {
             InitializeComponent();
