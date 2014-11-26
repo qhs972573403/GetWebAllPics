@@ -18,6 +18,7 @@ namespace GetWebContent
 		{
 			return new DocumentWithLinks(htmlDocument);
 		}
+
         public static DocumentWithLinks GetSrcLinks(this HtmlDocument htmlDocument)
         {
             return new DocumentWithLinks(htmlDocument, true);
@@ -42,17 +43,14 @@ namespace GetWebContent
 		/// <param name="doc">The input HTML document. May not be null.</param>
 		public DocumentWithLinks(HtmlDocument doc)
 		{
-
-
 			m_Doc = doc;
 			GetLinks();
 			GetReferences();
             GetReferencesText();
 		}
+
         public DocumentWithLinks(HtmlDocument doc, bool bSrc)
         {
-
-
             m_Doc = doc;
             GetSrcLinks();
             //GetReferences();
@@ -99,6 +97,7 @@ namespace GetWebContent
 				Distinct().
 				ToArray();
 		}
+
         private void GetSrcLinks()
         {
             HtmlNodeCollection atts = m_Doc.DocumentNode.SelectNodes("//*[@src]");
@@ -116,6 +115,7 @@ namespace GetWebContent
                 Distinct().
                 ToArray();
         }
+
 		private void GetReferences()
 		{
 			HtmlNodeCollection hrefs = m_Doc.DocumentNode.SelectNodes("//a[@href]");
@@ -131,6 +131,7 @@ namespace GetWebContent
 				Distinct().
 				ToArray();
 		}
+
         private void GetReferencesText()
         {
             try

@@ -24,10 +24,41 @@ namespace GetWebContent
         {
             InitializeComponent();
         }
+
+          /*
+          站点		--->  CSS路径
+         "Cnblogs"	---> "div#cnblogs_post_body"
+         "Csdn"		---> "div#article_content.article_content"
+         "51CTO"		---> "div.showContent"
+         "Iteye"		---> "div#blog_content.blog_content"
+         "ItPub"		---> "div.Blog_wz1"
+         "ChinaUnix" ---> "div.Blog_wz1"
+          */
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+            this.textBoxUrl.Text = "http://www.cnblogs.com/ice-river/p/4112323.html";
+            this.textBoxCssPath.Text = "div#cnblogs_post_body";
+            deles = new TaskDelegate(new ccTaskDelegate(RefreshTask));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GetTitle();
+            GetMainContent();
+        }
+
+        private void buttonGetPics_Click(object sender, EventArgs e)
+        {
+            GetTitle();
+            GetMainContent();
+            this.tabControl1.SelectTab(2);
+            DownloadPic(this.textBoxUrl.Text, this.richTextBox1.Text, this.textBoxTitle.Text);
+        }
+
         private void GetTitle()
         {
-            string strContent
-                = m_wd.GetPageByHttpWebRequest(this.textBoxUrl.Text, Encoding.UTF8);
+            string strContent = m_wd.GetPageByHttpWebRequest(this.textBoxUrl.Text, Encoding.UTF8);
             HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument
             {
                 OptionAddDebuggingAttributes = false,
@@ -51,10 +82,10 @@ namespace GetWebContent
             strTitle = Regex.Replace(strTitle, "[\"]", "").ToString();
             this.textBoxTitle.Text = strTitle.TrimEnd();
         }
+
         private void GetMainContent()
         {
-            string strContent
-                = m_wd.GetPageByHttpWebRequest(this.textBoxUrl.Text, Encoding.UTF8);
+            string strContent = m_wd.GetPageByHttpWebRequest(this.textBoxUrl.Text, Encoding.UTF8);
             HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument
             {
                 OptionAddDebuggingAttributes = false,
@@ -73,48 +104,9 @@ namespace GetWebContent
                 this.webBrowser1.DocumentText = this.richTextBox1.Text;
             }
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        public void DownloadPic(string strLink, string strNewPage, string strPageTitle)
         {
-            GetTitle();
-            GetMainContent();
-        }
-
-        /*
-  站点		--->  CSS路径
-"Cnblogs"	---> "div#cnblogs_post_body"
-"Csdn"		---> "div#article_content.article_content"
-"51CTO"		---> "div.showContent"
-"Iteye"		---> "div#blog_content.blog_content"
-"ItPub"		---> "div.Blog_wz1"
-"ChinaUnix" ---> "div.Blog_wz1"
-          */
-      
-
-        private void Frm_Main_Load(object sender, EventArgs e)
-        {
-            this.textBoxUrl.Text = "http://www.cnblogs.com/ice-river/p/4112323.html";
-            this.textBoxCssPath.Text = "div#cnblogs_post_body";
-            deles = new TaskDelegate(new ccTaskDelegate(RefreshTask));
-        }
-
-        protected string NormalizeLink(string baseUrl, string link)
-        {
-            return link.NormalizeUrl(baseUrl);
-        }
-
-        protected string GetNormalizedLink(string baseUrl, string decodedLink)
-        {
-            string normalizedLink = NormalizeLink(baseUrl, decodedLink);
-
-            return normalizedLink;
-        }
-
-        public void DownloadPic(string strLink, string strNewPage
-            , string strPageTitle)
-        {
-
-
-
             WebClient wc = new WebClient();
  
             HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument
@@ -156,19 +148,29 @@ namespace GetWebContent
                 {
                 } //end try
             }
+
             strPageTitle = strPageTitle.Replace("\\", "").Replace("/", "").Replace(":", "").Replace("*", "").Replace("?", "")
              .Replace("\"", "").Replace("<", "").Replace(">", "").Replace("|", "");
             strPageTitle = Regex.Replace(strPageTitle, @"[|•/\;.':*?<>-]", "").ToString();
             strPageTitle = Regex.Replace(strPageTitle, "[\"]", "").ToString();
             strPageTitle = Regex.Replace(strPageTitle, @"\s", "");
 
-
             File.WriteAllText(Path.Combine(strPageTitle, "index.html"), strNewPage, Encoding.UTF8);
 
             PrintLog(" 文章 [" + strPageTitle + "] 的全部图片下载完成!!!\n");
         }
-        protected string DownLoadPicInternal(WebClient wc, string strNewPage, string strPageTitle, string strPicLink
-                               , string strTureLink, string strExtension, ref int i)
+
+        protected string GetNormalizedLink(string baseUrl, string decodedLink)
+        {
+            return NormalizeLink(baseUrl, decodedLink);
+        }
+
+        protected string NormalizeLink(string baseUrl, string link)
+        {
+            return link.NormalizeUrl(baseUrl);
+        }
+
+        protected string DownLoadPicInternal(WebClient wc, string strNewPage, string strPageTitle, string strPicLink , string strTureLink, string strExtension, ref int i)
         {
             strPageTitle = strPageTitle.Replace("\\", "").Replace("/", "").Replace(":", "").Replace("*", "").Replace("?", "")
             .Replace("\"", "").Replace("<", "").Replace(">", "").Replace("|", "");
@@ -193,10 +195,9 @@ namespace GetWebContent
             PrintLog(" 下载完成文章 [" + strPageTitle + "] 的第" + i.ToString() + "张图片\n");
             System.Threading.Thread.Sleep(300);
             i++;
-            return strNewPage;
 
+            return strNewPage;
         }
-    
 
         public void RefreshTask(DelegatePara dp)
         {
@@ -210,8 +211,8 @@ namespace GetWebContent
             //转换参数
             string strLog = (string)dp.strLog;
             WriteLog(strLog);
-
         }
+
         protected void PrintLog(string strLog)
         {
             DelegatePara dp = new DelegatePara();
@@ -219,6 +220,7 @@ namespace GetWebContent
             dp.strLog = strLog;
             deles.Refresh(dp);
         }
+
         public void WriteLog(string strLog)
         {
             try
@@ -232,15 +234,7 @@ namespace GetWebContent
             catch
             {
             }
-
-
         }
-        private void buttonGetPics_Click(object sender, EventArgs e)
-        {
-            GetTitle();
-            GetMainContent();
-            this.tabControl1.SelectTab(2);
-            DownloadPic(this.textBoxUrl.Text, this.richTextBox1.Text, this.textBoxTitle.Text);
-        }
+
     }
 }

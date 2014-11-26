@@ -38,11 +38,11 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonGetPics = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -93,16 +93,16 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(29, 138);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(922, 251);
+            this.tabControl1.Size = new System.Drawing.Size(922, 473);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage2
@@ -111,7 +111,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(914, 225);
+            this.tabPage2.Size = new System.Drawing.Size(914, 447);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "网页内容";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(3, 3);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(908, 219);
+            this.webBrowser1.Size = new System.Drawing.Size(908, 441);
             this.webBrowser1.TabIndex = 0;
             // 
             // tabPage1
@@ -144,6 +144,26 @@
             this.richTextBox1.Size = new System.Drawing.Size(908, 219);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.richTextBoxLog);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(914, 225);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "图片下载日志";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxLog
+            // 
+            this.richTextBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLog.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxLog.Name = "richTextBoxLog";
+            this.richTextBoxLog.Size = new System.Drawing.Size(908, 219);
+            this.richTextBoxLog.TabIndex = 0;
+            this.richTextBoxLog.Text = "";
             // 
             // textBoxTitle
             // 
@@ -172,31 +192,11 @@
             this.buttonGetPics.UseVisualStyleBackColor = true;
             this.buttonGetPics.Click += new System.EventHandler(this.buttonGetPics_Click);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.richTextBoxLog);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(914, 225);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "图片下载日志";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // richTextBoxLog
-            // 
-            this.richTextBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxLog.Location = new System.Drawing.Point(3, 3);
-            this.richTextBoxLog.Name = "richTextBoxLog";
-            this.richTextBoxLog.Size = new System.Drawing.Size(908, 219);
-            this.richTextBoxLog.TabIndex = 0;
-            this.richTextBoxLog.Text = "";
-            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 401);
+            this.ClientSize = new System.Drawing.Size(963, 623);
             this.Controls.Add(this.buttonGetPics);
             this.Controls.Add(this.textBoxTitle);
             this.Controls.Add(this.label3);
